@@ -60,22 +60,50 @@ export default new Vuex.Store({
       orderItems: []
     },
     item: {
-      qty: "",
+      qty: 1,
       size: "",
       flavor: "",
-      toppings: []
+      toppings: [""]
     }
   },
 
   mutations: {
-    toggleChecked: function(state) {
-      if (state.currentOrder.orderItems.length === 0) {
-        state.currentOrder.orderItems.push(state.item);
-        console.log(...state.currentOrder.orderItems);
+    buildItem: function(state, payload) {
+      switch (payload.key) {
+        case "size":
+          if (state.item.size != payload.value) {
+            state.item.size = payload.value;
+          } else {
+            state.item.size = "";
+          }
+          break;
+        case "flavor":
+          if (state.item.flavor != payload.value) {
+            state.item.flavor = payload.value;
+          } else {
+            state.item.flavor = "";
+          }
+          break;
+        case "topping":
+          if (state.item.toppings.indexOf(payload.value) == -1) {
+            state.item.toppings.push(payload.value);
+          } else {
+            var index = state.item.toppings.indexOf(payload.value);
+            state.item.toppings.splice(index, 1);
+            break;
+          }
       }
     },
-    createPizza: function(state, payload) {
+    newItem: function(state) {
       state.currentOrder.orderItems.push(state.item);
+      console.log(Object.values(state.item));
+    }
+  },
+  getters: {
+    isChecked: function(state) {
+      let currentItemVals = Object.values(state.item) + [state.item.toppings];
+      console.log(currentItemVals);
+      return currentItemVals;
     }
   },
   actions: {}

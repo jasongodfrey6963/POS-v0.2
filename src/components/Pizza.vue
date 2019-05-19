@@ -4,7 +4,7 @@
       <h4>Sizes</h4>
       <div class="button-wrapper">
         <OButton
-          id="sizes"
+          id="size"
           v-for="size in sizes"
           :key="size.value"
           :value="size.value"
@@ -17,7 +17,7 @@
       <h4>Crust</h4>
       <div class="button-wrapper">
         <OButton
-          id="crusts"
+          id="flavor"
           v-for="flavor in flavors"
           :key="flavor.value"
           :value="flavor.value"
@@ -30,7 +30,7 @@
       <h4>Toppings</h4>
       <div class="button-wrapper">
         <OButton
-          id="toppings"
+          id="topping"
           v-for="topping in toppings"
           :key="topping.value"
           :value="topping.value"

@@ -1,5 +1,9 @@
 <template>
-  <span @click="select" :class="{active: isChecked, inactive: !isChecked}">{{value}}</span>
+  <span
+    @click="select"
+    @change="toggle"
+    :class="{active: isChecked, inactive: !isChecked}"
+  >{{value}}</span>
 </template>
 
 <script>
@@ -16,14 +20,25 @@ export default {
       isChecked: this.checked
     };
   },
+  computed: {
+    itemValues: function() {
+      return this.$store.getters.isChecked;
+    },
+    toggle: function() {
+      if (this.itemValues.indexOf(this.value) == -1) {
+        return (this.isChecked = false);
+      } else {
+        return (this.isChecked = true);
+      }
+    }
+  },
   methods: {
     select: function() {
       //Toggles button style
-      this.isChecked = !this.isChecked;
-      this.$store.commit("toggleChecked", {
-        key: this.id,
-        value: this.value
-      });
+      //this.isChecked = !this.isChecked;
+      //sends data from props to store to update the item being edited
+
+      this.$store.commit("buildItem", { key: this.id, value: this.value });
     }
   }
 };

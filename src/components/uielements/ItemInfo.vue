@@ -1,13 +1,13 @@
 <template>
   <div class="item-wrapper">
     <div class="row">
-      <p>1</p>
-      <p>12"</p>
-      <p>Handtossed</p>
+      <p>{{qty}}</p>
+      <p>{{size}}</p>
+      <p>{{flavor}}</p>
     </div>
-    <p class="column">Pepperoni</p>
-    <p class="column">Ham</p>
-    <p class="column">Bacon</p>
+    <div class="column">
+      <p v-for="topping in toppings" :key="topping.index">{{topping}}</p>
+    </div>
   </div>
 </template>
 
@@ -15,10 +15,10 @@
 export default {
   name: "ItemInfo",
   props: {
-    qty: String,
+    qty: Number,
     size: String,
     flavor: String,
-    toppings: String
+    toppings: Array
   }
 };
 </script>

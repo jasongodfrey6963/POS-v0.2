@@ -1,7 +1,7 @@
 <template>
   <div>
     <cust-info></cust-info>
-    <item-info v-for="item in orderItems" :key="item.index"></item-info>
+    <item-info v-bind="item"></item-info>
   </div>
 </template>
 
@@ -18,8 +18,11 @@ export default {
     customer: function() {
       return this.$store.state.currentOrder.customer;
     },
-    orderItems: function() {
+    /*orderItems: function() {
       return this.$store.state.currentOrder.orderItems;
+    }*/
+    item: function() {
+      return this.$store.state.item;
     }
   }
 };
