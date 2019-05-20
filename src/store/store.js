@@ -60,6 +60,7 @@ export default new Vuex.Store({
       orderItems: []
     },
     item: {
+      current: true,
       qty: 1,
       size: "",
       flavor: "",
@@ -88,7 +89,7 @@ export default new Vuex.Store({
           if (state.item.toppings.indexOf(payload.value) == -1) {
             state.item.toppings.push(payload.value);
           } else {
-            var index = state.item.toppings.indexOf(payload.value);
+            let index = state.item.toppings.indexOf(payload.value);
             state.item.toppings.splice(index, 1);
             break;
           }
@@ -96,14 +97,19 @@ export default new Vuex.Store({
     },
     newItem: function(state) {
       state.currentOrder.orderItems.push(state.item);
-      console.log(Object.values(state.item));
     }
   },
   getters: {
+    //This right here is some kinda magic.  This allows the active/inactive class of an order button "OButton.vue" to be managed by the state of item.
     isChecked: function(state) {
       let currentItemVals = Object.values(state.item) + [state.item.toppings];
-      console.log(currentItemVals);
       return currentItemVals;
+    },
+    currentItem: function(state) {
+      //TODO: Chain this with isChecked to update an item based on the truthiness of the current key
+      return state.currentOrder.orderItems.filter(
+        item => (item.current = true)
+      );
     }
   },
   actions: {}

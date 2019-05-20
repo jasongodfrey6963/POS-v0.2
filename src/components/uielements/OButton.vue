@@ -16,7 +16,7 @@ export default {
   name: "OButton",
   data: function() {
     return {
-      //This is used in select function
+      //Utilized by toggle found below to manage the style class
       isChecked: this.checked
     };
   },
@@ -24,6 +24,7 @@ export default {
     itemValues: function() {
       return this.$store.getters.isChecked;
     },
+    //Utilize some kind of getter wizardry to update the inactive/ active style class
     toggle: function() {
       if (this.itemValues.indexOf(this.value) == -1) {
         return (this.isChecked = false);
@@ -34,7 +35,7 @@ export default {
   },
   methods: {
     select: function() {
-      //Toggles button style
+      //Toggles button style <--now a reactive prop based on state! WOO
       //this.isChecked = !this.isChecked;
       //sends data from props to store to update the item being edited
 
